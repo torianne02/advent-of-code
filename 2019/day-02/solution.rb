@@ -1,4 +1,4 @@
-def get_opcode_arr
+def get_comp_memory
   File.read("2019/day-02/input.txt").split(',').map(&:to_i)
 end
 
@@ -8,23 +8,35 @@ def calculate_opcode(opcode, input_1, input_2)
   return input_1 * input_2 if opcode == 2 
 end
 
-def intcode_comp(num_1, num_2, arr)
-  i = 0
-  arr[1] = num_1
-  arr[2] = num_2
+def intcode_comp(noun, verb, memory)
+  address = 0
+  memory[1] = noun
+  memory[2] = verb
 
-  while arr[i] != 99
-    opcode = arr[i]
-    val_1 = arr[arr[i + 1]]
-    val_2 = arr[arr[i + 2]]
-    output = arr[i + 3]
+  while memory[address] != 99
+    opcode = memory[address]
+    param_1 = memory[memory[address + 1]]
+    param_2 = memory[memory[address + 2]]
+    output = memory[address + 3]
 
-    arr[output] = calculate_opcode(opcode, val_1, val_2)
+    memory[output] = calculate_opcode(opcode, param_1, param_2)
 
-    i += 4
+    address += 4
   end 
 
-  puts arr[0]
+  return memory[0]
 end
 
-intcode_comp(12, 2, get_opcode_arr)
+def find_noun_and_verb(goal)
+  (1..100).each do |noun|
+    (1..100).each do |verb|
+      return (100 * noun + verb) if intcode_comp(noun, verb, get_comp_memory) == goal
+    end 
+  end 
+end 
+
+# Part 1
+intcode_comp(12, 2, get_comp_memory)
+
+# Part 2
+find_noun_and_verb(19690720)
