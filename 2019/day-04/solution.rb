@@ -33,7 +33,6 @@ def find_possible_passwords(val_1, val_2)
     nums_arr = num.to_s.chars.map(&:to_i)
     if check_if_ascending(nums_arr) == true
       correct_count_part_1 += 1 if check_if_repeat(nums_arr) == true
-
       correct_count_part_2 += 1 if is_repeat_part_of_consecutive_group?(nums_arr) == true 
     end 
   end
