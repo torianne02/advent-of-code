@@ -1,5 +1,5 @@
 def get_password_info
-  File.read("2020/day-02/input.txt").split.map(&:to_i)
+  File.read("2020/day-02/input.txt").split("\n")
 end
 
 # Part 1
