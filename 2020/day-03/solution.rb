@@ -1,5 +1,5 @@
 def get_tree_map
-  File.read("2020/day-02/input.txt").split("\n").map(&:chars).map { |line| line * 100 }
+  File.read("2020/day-03/input.txt").split("\n").map(&:chars).map { |line| line * 100 }
 end
 
 def trajectory_issues(tree_map, slopes)
